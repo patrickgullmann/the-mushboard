@@ -1,0 +1,50 @@
+* {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    box-sizing: border-box;
+    margin: 0;
+    color: #cccccc;
+}
+
+body {
+    display: grid;
+    flex-direction: column;
+    text-align: center;
+}
+
+#background {
+    background-image: url("https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+figure {
+    margin: 10px;
+    border: 3px solid rgb(19, 17, 17);
+    border-radius: 5px;
+    /*verhindern eines Spaltes zwischen bild und beschreibung*/
+    background-color: rgb(19, 17, 17);
+}
+
+figure img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 3px 3px 0 0;
+}
+
+figure figcaption {
+    padding: 4px 4px 4px 6px;
+    background-color: rgb(19, 17, 17);
+    color: #cccccc;
+    border-radius: 0 0 3px 3px;
+}

@@ -2,9 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>My Imageboard</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <h1>My Imageboard</h1>
+    <h2>Hi! Vue is so awesome!!</h2>
+
+    <!-- this container is for our Vue instance -->
+    <div id="main">
+        <div class="container">
+
+            <figure v-for="image in images" v-bind:key="image.id">
+                <img v-bind:src="image.url" alt="Imagination" />
+                <figcaption>{{image.title}}</figcaption>
+            </figure>
+
+        </div>   
+    </div>
+
+    <div id="background"></div>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
 </body>
 </html>
