@@ -11,6 +11,26 @@ body {
     text-align: center;
 }
 
+h1 {
+    margin: 10px;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+::placeholder {
+    color: black;
+}
+
+button {
+    color: black;
+}
+
 #background {
     background-image: url("https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     position: fixed;
@@ -25,6 +45,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-auto-rows: 320px; */
 }
 
 figure {
@@ -36,10 +59,11 @@ figure {
 }
 
 figure img {
-    width: 300px;
+    width: 350px;
     height: 300px;
     object-fit: cover;
     border-radius: 3px 3px 0 0;
+    filter: brightness(70%);
 }
 
 figure figcaption {
