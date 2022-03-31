@@ -1,4 +1,5 @@
 import * as Vue from "./vue.js";
+import modalComponent from "./modalComponent.js";
 
 Vue.createApp({
     data() {
@@ -8,6 +9,7 @@ Vue.createApp({
             title: "",
             description: "",
             file: null,
+            selectedImage: null,
         };
     },
 
@@ -24,16 +26,26 @@ Vue.createApp({
             });
     },
 
+    components: {
+        "modal-component": modalComponent,
+    },
+
     methods: {
+        hideModalComponent() {
+            // set the cond of v-if to falsy
+            console.log("Whatsup");
+            this.selectedImage = null;
+        },
+        selectAnImageAndShowModal(ImageIdClicked) {
+            // user selected an image, store it for later truthy render component/modal
+            console.log("ImageIdClicked:", ImageIdClicked);
+            this.selectedImage = ImageIdClicked;
+        },
         fileSelectHandler: function (e) {
             //console.log(e);
             this.file = e.target.files[0];
         },
         clickHandler: function () {
-            //need to do it like this to send files!!!
-            //the rest(for body) we just send "in addition"
-            //if we dont sent a file it wont work! -> see encouter "fetch"
-            //we would do it the usual way with defining an object body etc
             const fd = new FormData();
             fd.append("username", this.username);
             fd.append("title", this.title);
@@ -48,7 +60,7 @@ Vue.createApp({
                 .then((res) => res.json())
                 .then((response) => {
                     console.log("response: ", response);
-                    this.images.unshift(response[0]);
+                    this.images.unshift(response);
 
                     //reset form fields
                     this.username = "";

@@ -10,6 +10,19 @@ app.use(express.static("./public"));
 
 app.use(express.json());
 
+app.get("/modal/:idPassed", (req, res) => {
+    //console.log(req.params.idPassed);
+    db.getSelectetImageData(req.params.idPassed)
+        .then(({ rows }) => {
+            //console.log(result.rows);
+            // destructured before and used fancy syntax
+            res.json(rows[0]);
+        })
+        .catch((err) => {
+            console.log("error getting image data from db: ", err);
+        });
+});
+
 app.get("/images", (req, res) => {
     db.getImages()
         .then((result) => {
@@ -33,7 +46,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         db.addImage(url, username, title, description)
             .then((result) => {
                 //console.log(result.rows);
-                res.json(result.rows);
+                res.json(result.rows[0]);
             })
             .catch((err) => {
                 console.log("error adding image to db: ", err);

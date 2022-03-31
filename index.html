@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1> 🍄 The Mush-board 🍄 </h1>
+    <h1> 🍄 THE MUSH-BOARD | ## EDITION 🍄 </h1>
     <h2> A mush-board for mushroom lovers implemented by using Vue.js! </h2>
 
     <!-- this container is for our Vue instance -->
@@ -24,12 +24,15 @@
 
         <div class="container">
 
-            <figure v-for="image in images" v-bind:key="image.id">
+            <figure v-for="image in images" v-bind:key="image.id" @click="selectAnImageAndShowModal(image.id)">
                 <img v-bind:src="image.url" alt="Imagination" />
                 <figcaption>{{image.title}}</figcaption>
             </figure>
 
-        </div>   
+        </div> 
+        
+        <modal-component v-if="selectedImage" v-bind:image-id="selectedImage" @close-modal="hideModalComponent"></modal-component>
+
     </div>
 
     <div id="background"></div>
