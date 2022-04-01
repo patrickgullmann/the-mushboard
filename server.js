@@ -23,6 +23,31 @@ app.get("/modal/:idPassed", (req, res) => {
         });
 });
 
+app.post("/comment", (req, res) => {
+    //console.log(req.body);
+    const { imageId, username, comment } = req.body;
+
+    db.insertComment(imageId, username, comment)
+        .then(({ rows }) => {
+            //send it back to instantly add it!
+            res.json(rows[0]);
+        })
+        .catch((err) => {
+            console.log("error insert comment in db: ", err);
+        });
+});
+
+app.get("/comments/:imageId", (req, res) => {
+    db.getComments(req.params.imageId)
+        .then(({ rows }) => {
+            //console.log(result.rows);
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error getting MORE images from db: ", err);
+        });
+});
+
 app.get("/images", (req, res) => {
     db.getImages()
         .then((result) => {
@@ -56,6 +81,17 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         //just sends a json stringifyied object! No destructuring
         return res.sendStatus(500);
     }
+});
+
+app.get("/moreimages/:lowestIdOnScreen", (req, res) => {
+    db.getMoreImages(req.params.lowestIdOnScreen)
+        .then(({ rows }) => {
+            //console.log(result.rows);
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error getting MORE images from db: ", err);
+        });
 });
 
 app.get("*", (req, res) => {

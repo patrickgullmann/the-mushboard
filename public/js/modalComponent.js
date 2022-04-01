@@ -1,3 +1,5 @@
+import commentsComponent from "./commentsComponent.js";
+
 const modalComponent = {
     data() {
         return {
@@ -16,12 +18,16 @@ const modalComponent = {
         fetch(`/modal/${this.imageId}`)
             .then((res) => res.json())
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 this.selectedImageData = response;
             })
             .catch((err) => {
                 console.log(err);
             });
+    },
+
+    components: {
+        "comments-component": commentsComponent,
     },
 
     methods: {
@@ -36,9 +42,10 @@ const modalComponent = {
                     <div class="modal-content">
                         <span class="close" @click="parentCloseModal" >&times;</span>
                         <img id="selectedImg" v-bind:src="selectedImageData.url" alt="Imagination" />
-                        <p>{{selectedImageData.title}}</p>
-                        <p>{{selectedImageData.description}}</p>
-                        <p>Posted by {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
+                        <p>Title | {{selectedImageData.title}}</p>
+                        <p>Description | {{selectedImageData.description}}</p>
+                        <p>Posted by | {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
+                        <comments-component v-bind:comment-image-id="imageId"></comments-component>
                     </div>
                 </div>`,
 };

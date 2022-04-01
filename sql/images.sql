@@ -1,13 +1,23 @@
-DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS images CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE images(
     id SERIAL PRIMARY KEY,
     url VARCHAR NOT NULL,
     username VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
-    description TEXT,
+    description TEXT,a
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR NOT NULL,
+    comment VARCHAR NOT NULL,
+    image_id INTEGER NOT NULL REFERENCES images(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/imageboard/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',

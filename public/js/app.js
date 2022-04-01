@@ -19,7 +19,8 @@ Vue.createApp({
             .then((res) => res.json())
             .then((response) => {
                 console.log(response);
-                this.images = response.reverse();
+                //handled now in db so no response.reverse()
+                this.images = response;
             })
             .catch((err) => {
                 console.log("error first rendering images: ", err);
@@ -45,7 +46,7 @@ Vue.createApp({
             //console.log(e);
             this.file = e.target.files[0];
         },
-        clickHandler: function () {
+        clickPostImageHandler: function () {
             const fd = new FormData();
             fd.append("username", this.username);
             fd.append("title", this.title);
@@ -70,6 +71,42 @@ Vue.createApp({
                 })
                 .catch((err) => {
                     console.log("err submit formfields or upload image: ", err);
+                });
+        },
+        clickShowMoreImagesHandler: function () {
+            let lowestId = null;
+            //for ... of und nicht for ... in da array?
+            for (let image of this.images) {
+                console.log(image.id);
+                //um den ersten Wert als Starter zu setzen
+                if (lowestId) {
+                    if (image.id < lowestId) {
+                        lowestId = image.id;
+                    }
+                } else {
+                    lowestId = image.id;
+                }
+            }
+            //console.log(lowestId);
+
+            fetch(`/moreimages/${lowestId}`)
+                .then((res) => res.json())
+                .then((response) => {
+                    for (let obj of response) {
+                        this.images.push(obj);
+                    }
+                    //hide more button if no more pictures available
+                    for (let image of this.images) {
+                        if (image.id === response[0].lowestId) {
+                            document.getElementById(
+                                "moreButton"
+                            ).style.visibility = "hidden";
+                        }
+                    }
+                    //console.log(this.images);
+                })
+                .catch((err) => {
+                    console.log("err showing more images: ", err);
                 });
         },
     },
