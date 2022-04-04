@@ -57,7 +57,7 @@ exports.insertComment = (image_id, username, comment) => {
 
 exports.getComments = (imageId) => {
     return db.query(
-        `SELECT * FROM comments WHERE image_id = $1 ORDER BY id DESC;`,
+        `SELECT * FROM comments WHERE image_id = $1 ORDER BY id ASC;`,
         [imageId]
     );
 };

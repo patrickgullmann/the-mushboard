@@ -54,8 +54,8 @@ const commentsComponent = {
 
     template: `
                 <div class="commentsComponentContainer">
-
-                    <form>
+                    <p id="headline-comment-section"> COMMENTS | SECTION </p>
+                    <form >
                         <input v-model="username" type="text" name="username" placeholder="Username" />
                         <input v-model="comment" type="text" name="comment" placeholder="Comment" />
                         <button @click.prevent="clickPostComment">Submit</button>

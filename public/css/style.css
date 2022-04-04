@@ -99,7 +99,7 @@ figure figcaption {
 
 .commentsContainer {
     overflow: scroll;
-    height: 150px;
+    height: 350px;
 }
 
 /* --------------------------------MODAL PART ---------------------------------------------*/
@@ -120,13 +120,37 @@ figure figcaption {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(19, 17, 17, 0.7);
     /* background-color: rgb(19, 17, 17); */
-    margin: 5% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #cccccc;
     width: 80%; /* Could be more or less, depending on screen size */
     position: relative;
+    border-radius: 2px;
+}
+
+.modal-grid-container {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+}
+
+.modal-picture {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+}
+
+.modal-comments {
+    margin-top: 10px;
+}
+
+.commentsComponentContainer {
+    margin-top: 10px;
+}
+
+#headline-comment-section {
+    margin-bottom: 20px;
 }
 
 /* The Close Button */
@@ -151,6 +175,7 @@ figure figcaption {
 
 #selectedImg {
     margin-top: 10px;
+    margin-bottom: 10px;
     width: 450px;
     height: 380px;
     object-fit: cover;

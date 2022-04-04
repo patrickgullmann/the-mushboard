@@ -51,11 +51,17 @@ const modalComponent = {
                 <div v-if="loaded" id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" @click="parentCloseModal" >&times;</span>
-                        <img id="selectedImg" v-bind:src="selectedImageData.url" alt="Imagination" />
-                        <p>Title | {{selectedImageData.title}}</p>
-                        <p>Description | {{selectedImageData.description}}</p>
-                        <p>Posted by | {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
-                        <comments-component v-bind:comment-image-id="imageId"></comments-component>
+                        <div class="modal-grid-container">
+                            <div class="modal-picture">
+                                <img id="selectedImg" v-bind:src="selectedImageData.url" alt="Imagination" />
+                                <p>Title | {{selectedImageData.title}}</p>
+                                <p>Description | {{selectedImageData.description}}</p>
+                                <p>Posted by | {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
+                            </div>
+                            <div class="modal-comments">
+                                <comments-component v-bind:comment-image-id="imageId"></comments-component>
+                            </div>
+                        </div>
                     </div>
                 </div>`,
 };
