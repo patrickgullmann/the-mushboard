@@ -153,6 +153,25 @@ figure figcaption {
     margin-bottom: 20px;
 }
 
+#posted-by {
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.one-comment {
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin: 6px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+#posted-at {
+    font-style: italic;
+    font-size: 10px;
+}
+
 /* The Close Button */
 .close {
     color: #aaa;

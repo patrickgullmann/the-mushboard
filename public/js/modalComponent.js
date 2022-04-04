@@ -22,6 +22,10 @@ const modalComponent = {
             .then((response) => {
                 //not got false/null from the server
                 if (response) {
+                    //just to convert timestamp!
+                    response.created_at = response.created_at
+                        .toString()
+                        .slice(0, 10);
                     this.selectedImageData = response;
                     this.loaded = true;
                 } else {
@@ -56,7 +60,7 @@ const modalComponent = {
                                 <img id="selectedImg" v-bind:src="selectedImageData.url" alt="Imagination" />
                                 <p>Title | {{selectedImageData.title}}</p>
                                 <p>Description | {{selectedImageData.description}}</p>
-                                <p>Posted by | {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
+                                <p id="posted-by">Posted by | {{selectedImageData.username}} on {{selectedImageData.created_at}}</p>
                             </div>
                             <div class="modal-comments">
                                 <comments-component v-bind:comment-image-id="imageId"></comments-component>

@@ -14,7 +14,10 @@ const commentsComponent = {
         fetch(`/comments/${this.commentImageId}`)
             .then((res) => res.json())
             .then((response) => {
-                //console.log(response);
+                console.log(response);
+                for (let obj of response) {
+                    obj.created_at = obj.created_at.toString().slice(0, 10);
+                }
                 this.comments = response;
             })
             .catch((err) => {
@@ -41,7 +44,10 @@ const commentsComponent = {
                 .then((res) => res.json())
                 .then((response) => {
                     //console.log("response: ", response);
-                    this.comments.unshift(response);
+                    response.created_at = response.created_at
+                        .toString()
+                        .slice(0, 10);
+                    this.comments.push(response);
                     //reset form fields
                     this.username = "";
                     this.comment = "";
@@ -62,10 +68,10 @@ const commentsComponent = {
                     </form>
 
                     <div class="commentsContainer">
-                        <div v-for="comment in comments">
-                            <p>{{comment.username}}</p>
+                        <div class="one-comment" v-for="comment in comments">
+                            <p>{{comment.username}} <span id="posted-at">posted on {{comment.created_at}}</span></p>
                             <p>{{comment.comment}}</p>
-                            <p>{{comment.created_at}}</p>
+                            
                         </div>
                      </div> 
 
