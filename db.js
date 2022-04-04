@@ -61,3 +61,7 @@ exports.getComments = (imageId) => {
         [imageId]
     );
 };
+
+exports.getAllIds = () => {
+    return db.query(`SELECT id FROM images;`);
+};

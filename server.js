@@ -11,15 +11,28 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.get("/modal/:idPassed", (req, res) => {
-    //console.log(req.params.idPassed);
-    db.getSelectetImageData(req.params.idPassed)
+    //the getAllId is for the check when somebody types in another url!
+    db.getAllIds()
         .then(({ rows }) => {
-            //console.log(result.rows);
-            // destructured before and used fancy syntax
-            res.json(rows[0]);
+            let arr = [];
+            for (let obj of rows) {
+                arr.push(obj.id);
+            }
+            if (arr.includes(parseInt(req.params.idPassed))) {
+                db.getSelectetImageData(req.params.idPassed)
+                    .then(({ rows }) => {
+                        //console.log(result.rows);
+                        res.json(rows[0]);
+                    })
+                    .catch((err) => {
+                        console.log("error getting image data from db: ", err);
+                    });
+            } else {
+                res.json(null);
+            }
         })
         .catch((err) => {
-            console.log("error getting image data from db: ", err);
+            console.log("error getting all ids from db: ", err);
         });
 });
 

@@ -5,6 +5,8 @@ const modalComponent = {
         return {
             //there is then the url, title, etc. ...
             selectedImageData: {},
+            //loaded, da ja wir erst auf die Daten warten müssen
+            loaded: false,
         };
     },
 
@@ -18,8 +20,16 @@ const modalComponent = {
         fetch(`/modal/${this.imageId}`)
             .then((res) => res.json())
             .then((response) => {
-                //console.log(response);
-                this.selectedImageData = response;
+                //not got false/null from the server
+                if (response) {
+                    this.selectedImageData = response;
+                    this.loaded = true;
+                } else {
+                    //console.log(response);
+                    //if no picture in database close the tried to open modal!
+                    this.parentCloseModal();
+                    history.replaceState({}, "", "/");
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -38,7 +48,7 @@ const modalComponent = {
     },
 
     template: `
-                <div id="myModal" class="modal">
+                <div v-if="loaded" id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" @click="parentCloseModal" >&times;</span>
                         <img id="selectedImg" v-bind:src="selectedImageData.url" alt="Imagination" />

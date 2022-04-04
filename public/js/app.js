@@ -14,6 +14,16 @@ Vue.createApp({
     },
 
     mounted() {
+        if (location.pathname.slice(1)) {
+            this.selectedImage = location.pathname.slice(1);
+        }
+
+        window.addEventListener("popstate", () => {
+            // console.log("the user just used the forward or backward button!");
+            // console.log("url updated to:", location.pathname.slice(8));
+            this.selectedImage = location.pathname.slice(1);
+        });
+
         // console.log("this", this);
         fetch("/images")
             .then((res) => res.json())
@@ -34,13 +44,15 @@ Vue.createApp({
     methods: {
         hideModalComponent() {
             // set the cond of v-if to falsy
-            console.log("Whatsup");
+            //console.log("Whatsup");
             this.selectedImage = null;
+            history.pushState({}, "", "/");
         },
         selectAnImageAndShowModal(ImageIdClicked) {
             // user selected an image, store it for later truthy render component/modal
             console.log("ImageIdClicked:", ImageIdClicked);
             this.selectedImage = ImageIdClicked;
+            history.pushState({}, "", `/${ImageIdClicked}`);
         },
         fileSelectHandler: function (e) {
             //console.log(e);

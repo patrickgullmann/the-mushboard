@@ -24,6 +24,9 @@ const commentsComponent = {
 
     methods: {
         clickPostComment: function () {
+            //not needed -> handle this in the database with "not null"
+            // if (this.username.length == 0 || this.comment.length == 0) {
+            //     return; }
             fetch("/comment", {
                 method: "POST",
                 headers: {
