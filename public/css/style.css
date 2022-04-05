@@ -69,8 +69,8 @@ figure {
     /*verhindern eines Spaltes zwischen bild und beschreibung*/
     /* background-color: rgb(19, 17, 17, 0.9); */
     position: relative;
-    height: 400px;
-    width: 350px;
+    height: 420px;
+    width: 380px;
 }
 
 figure img {
