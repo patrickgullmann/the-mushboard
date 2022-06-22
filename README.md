@@ -16,5 +16,5 @@ The Mushboard is a public imageboard platform that allows users to upload images
 ### Uploader
 
 - On the top of the page, there are inputs for the image data (name, title, and description) plus users can select a file and upload it. 
-- Upon completion of upload, the image gets instantaneously added to the image grid and is read to comment.
+- Upon completion of upload, the image gets instantaneously added to the image grid and is ready to comment.
 
